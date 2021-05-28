@@ -17,10 +17,10 @@ try {
 
 module.exports = {
   siteMetadata: {
-    title: 'GCN',
+    title: 'Medicare for All PDX',
     description:
-      'A starter template to build amazing static websites with Gatsby, Contentful and Netlify',
-    siteUrl: 'https://gcn.netlify.com',
+      'We are a coalition of Medicare for All supporters based in Portland, OR. Join us in building a grassroots movement for health justice! ',
+    siteUrl: 'https://heuristic-brahmagupta-772fcb.netlify.app/',
     image: '/images/share.jpg',
     menuLinks: [
       {
