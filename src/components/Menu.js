@@ -31,10 +31,10 @@ const Nav = styled.nav`
 
   a {
     text-decoration: none;
-    color: DarkGray;
+    color: ${props => props.theme.colors.tertiary};
     font-weight: 600;
     transition: all 0.2s;
-    border-bottom: 2px solid ${props => props.theme.colors.text};
+    border-bottom: 2px solid ${props => props.theme.colors.tertiary};
     &:hover {
       color: white;
     }

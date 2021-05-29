@@ -32,6 +32,10 @@ module.exports = {
         slug: '/about/',
       },
       {
+        name: 'Events',
+        slug: '/upcoming-events/',
+      },
+      {
         name: 'Contact',
         slug: '/contact/',
       },
@@ -82,8 +86,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'GCN',
-        short_name: 'GCN',
+        name: 'Medicare for All Portland',
+        short_name: 'M4A PDX',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#ffffff',

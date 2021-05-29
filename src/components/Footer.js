@@ -51,27 +51,35 @@ const Footer = () => (
           target="_blank"
         >
           <img
-            src="https://images.ctfassets.net/fo9twyrwpveg/44baP9Gtm8qE2Umm8CQwQk/c43325463d1cb5db2ef97fca0788ea55/PoweredByContentful_LightBackground.svg"
+            src="https://images.ctfassets.net/7sv3zhq42l8v/7hAULZQuiXnAO3F9O7Se1O/0e4fcab3b057139a5615843617e783dc/M4A_Poster_New_2.png"
             style={{ width: '100px' }}
-            alt="Powered by Contentful"
+            alt="Medicare for All PDX Logo"
           />
         </a>
       </Item>
       <Item>
-        <a
-          href="https://github.com/ryanwiemer/gatsby-starter-gcn"
+      <a
+          href="https://facebook.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          gatsby-starter-gcn
-        </a>{' '}
-        by{' '}
+          Facebook
+        </a>
+        {'  '}
         <a
-          href="https://github.com/ryanwiemer"
+          href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          @ryanwiemer
+          Instagram
+        </a>
+        {'  '}
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Twitter
         </a>
       </Item>
     </List>
