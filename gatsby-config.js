@@ -53,6 +53,25 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              maxWidth: 800,
+              ratio: 1.77,
+              related: false,
+              noIframeBorder: true,
+              loadingStrategy: 'lazy',
+              urlOverrides: [
+                {
+                  id: "youtube",
+                  embedURL: videoId =>
+                    `https://www.youtube-nocookie.com/embed/${videoId}`,
+                },
+              ],
+              containerClass: "embedVideo-container",
+              iframeId: false,
+            },
+          },
+          {
             resolve: `gatsby-remark-prismjs`,
           },
           `gatsby-remark-autolink-headers`,

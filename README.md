@@ -19,11 +19,9 @@ yarn install
 
 ### Setup Contentful
 
-1.  [Sign up](https://www.contentful.com/sign-up/) for Contentful and create a new empty space
+1.  Copy [`./.contentful.json.sample`](https://github.com/thejkayway/m4apdx/blob/master/.contentful.json.sample) to `./.contentful.json`
 
-2.  `yarn run setup`
-
-3.  Enter in the requested info for your Contentful space found here: **app.contentful.com** → **Space Settings** → **API keys**. You will need to provide both a standard API key (first tab) and a management key (second tab).
+2.  Replace `spaceId` and `accessToken` for development and production environments. Info for your Contentful space can be found here: **app.contentful.com** → **Space Settings** → **API keys**.
 
 ## Customization
 
