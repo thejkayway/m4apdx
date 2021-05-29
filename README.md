@@ -1,42 +1,20 @@
-# gatsby-starter-gcn
+# Medicare for All Portland
 
-A starter template to build amazing static websites with Gatsby, Contentful and Netlify. Inspired by [gatsby-contentful-starter](https://github.com/contentful-userland/gatsby-contentful-starter).
-
-## Features
-
-- Contentful integration with ready to go placeholder content
-- Netlify integration including a pre-built contact form
-- Minimal responsive design - made to customize or tear apart
-- Pagination logic
-- Theme UI
-- SEO Friendly Component
-  - OpenGraph sharing support
-  - Sitemap Generation
-- Google Analytics
-- Progressive Web app
-- Offline Support
-- [Gatsby Standard module](https://www.npmjs.com/package/eslint-config-gatsby-standard) for linting Javascript with StandardJS
-- Stylelint support for Styled Components to lint the CSS in JS
+Demonstrating a potential website and authoring workflow with Gatsby, Contentful and Netlify.
 
 ## Demo
 
-https://gcn.netlify.com/
+https://heuristic-brahmagupta-772fcb.netlify.app/
 
-![](screenshots/demo.jpg)
+![](screenshots/demo.png)
 
 ## Getting Started
 
 ### Install
 
 ```
-git clone https://github.com/ryanwiemer/gatsby-starter-gcn.git
+git clone https://github.com/thejkayway/m4apdx.git && cd m4apdx
 yarn install
-```
-
-Or via the [Gatsby CLI](https://www.npmjs.com/package/gatsby-cli)
-
-```
-gatsby new gatsby-starter-gcn https://github.com/ryanwiemer/gatsby-starter-gcn.git
 ```
 
 ### Setup Contentful
@@ -51,14 +29,14 @@ gatsby new gatsby-starter-gcn https://github.com/ryanwiemer/gatsby-starter-gcn.g
 
 ### Website Data
 
-Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/gatsby-config.js)
+Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/thejkayway/m4apdx/blob/master/src/gatsby-config.js)
 
 ```js
   siteMetadata: {
-    title: 'GCN', // Title of the website
+    title: 'Title', // Title of the website
     description: // Description of the website
       'A starter template to build amazing static websites with Gatsby, Contentful and Netlify',
-    siteUrl: 'https://gcn.netlify.com', // Website URL. Do not include trailing slash
+    siteUrl: 'https://url.netlify.com', // Website URL. Do not include trailing slash
     image: '/images/share.jpg', // Path to default image for SEO
     menuLinks: [ // The links used in the top menu
       {
@@ -91,7 +69,7 @@ Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/ryanwiemer/ga
 
 ### Theme UI
 
-Edit [`/src/gatsby-plugin-theme-ui/index.js`](https://github.com/ryanwiemer/gatsby-starter-gcn/blob/master/src/gatsby-plugin-them-ui/index.js)
+Edit [`/src/gatsby-plugin-theme-ui/index.js`](https://github.com/thejkayway/m4apdx/blob/master/src/gatsby-plugin-them-ui/index.js)
 
 ```js
 export default {
@@ -119,7 +97,7 @@ export default {
 }
 ```
 
-### Using Gatsby Standard
+### Using Gatsby Standard Linter Config
 
 1.  Quickly check your code for errors with the `yarn test` script
 2.  You can view the [Gatsby Standard README](https://github.com/brandonkal/eslint-config-gatsby-standard) for details on how to integrate this project's included Gatsby Standard, Stylelint, and Prettier modules into your text editor
