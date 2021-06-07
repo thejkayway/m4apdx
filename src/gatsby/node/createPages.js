@@ -6,9 +6,29 @@ const { paginate } = require(`gatsby-awesome-pagination`)
 module.exports = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const basePath = config.siteMetadata.basePath || '/'
+  const blogBasePath = config.siteMetadata.blogBasePath || 'blog'
+  const eventsBasePath = config.siteMetadata.eventsBasePath || 'events'
 
-  // Create a page for each "post"
+  // Create a page for each "event" post
+  const eventsQuery = await graphql(query.data.events)
+  const events = eventsQuery.data.allContentfulEvent.edges
+  events.forEach((event, i) => {
+    const next = i === events.length - 1 ? null : events[i + 1].node
+    const prev = i === 0 ? null : events[i - 1].node
+
+    createPage({
+      path: `${eventsBasePath === '/' ? '' : eventsBasePath}/${event.node.slug}/`,
+      component: path.resolve(`./src/templates/event.js`),
+      context: {
+        slug: event.node.slug,
+        basePath: eventsBasePath === '/' ? '' : eventsBasePath,
+        prev,
+        next,
+      },
+    })
+  })
+
+  // Create a page for each blog "post"
   const postsQuery = await graphql(query.data.posts)
   const posts = postsQuery.data.allContentfulPost.edges
   posts.forEach((post, i) => {
@@ -16,28 +36,42 @@ module.exports = async ({ graphql, actions }) => {
     const prev = i === 0 ? null : posts[i - 1].node
 
     createPage({
-      path: `${basePath === '/' ? '' : basePath}/${post.node.slug}/`,
+      path: `${blogBasePath === '/' ? '' : blogBasePath}/${post.node.slug}/`,
       component: path.resolve(`./src/templates/post.js`),
       context: {
         slug: post.node.slug,
-        basePath: basePath === '/' ? '' : basePath,
+        basePath: blogBasePath === '/' ? '' : blogBasePath,
         prev,
         next,
       },
     })
   })
 
-  // Create a page containing all "posts" and paginate.
+  // Create a page containing all "event" posts and paginate.
+  paginate({
+    createPage,
+    component: path.resolve(`./src/templates/events.js`),
+    items: events,
+    itemsPerFirstPage: config.siteMetadata.postsPerFirstPage || 7,
+    itemsPerPage: config.siteMetadata.postsPerPage || 6,
+    pathPrefix: eventsBasePath,
+    context: {
+      basePath: eventsBasePath === '/' ? '' : eventsBasePath,
+      paginationPath: eventsBasePath === '/' ? '' : `/${eventsBasePath}`,
+    },
+  })
+
+  // Create a page containing all blog "posts" and paginate.
   paginate({
     createPage,
     component: path.resolve(`./src/templates/posts.js`),
     items: posts,
     itemsPerFirstPage: config.siteMetadata.postsPerFirstPage || 7,
     itemsPerPage: config.siteMetadata.postsPerPage || 6,
-    pathPrefix: basePath,
+    pathPrefix: blogBasePath,
     context: {
-      basePath: basePath === '/' ? '' : basePath,
-      paginationPath: basePath === '/' ? '' : `/${basePath}`,
+      basePath: blogBasePath === '/' ? '' : blogBasePath,
+      paginationPath: blogBasePath === '/' ? '' : `/${blogBasePath}`,
     },
   })
 
@@ -47,9 +81,9 @@ module.exports = async ({ graphql, actions }) => {
 
   tags.forEach((tag, i) => {
     const tagPagination =
-      basePath === '/'
+    blogBasePath === '/'
         ? `/tag/${tag.node.slug}`
-        : `/${basePath}/tag/${tag.node.slug}`
+        : `/${blogBasePath}/tag/${tag.node.slug}`
 
     paginate({
       createPage,
@@ -59,7 +93,7 @@ module.exports = async ({ graphql, actions }) => {
       pathPrefix: tagPagination,
       context: {
         slug: tag.node.slug,
-        basePath: basePath === '/' ? '' : basePath,
+        basePath: blogBasePath === '/' ? '' : blogBasePath,
         paginationPath: tagPagination,
       },
     })
@@ -76,5 +110,17 @@ module.exports = async ({ graphql, actions }) => {
         slug: page.node.slug,
       },
     })
+  })
+
+  // Create home page
+  const homePageQuery = await graphql(query.data.pages)
+  const home = homePageQuery.data.allContentfulPage.edges.find(page => page.node.slug === 'home')
+  createPage({
+    path: `/`,
+    component: path.resolve(`./src/templates/page.js`),
+    context: {
+      hideTitle: true,
+      slug: home.node.slug,
+    },
   })
 }

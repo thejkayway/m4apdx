@@ -21,21 +21,24 @@ const Nav = styled.nav`
 
   li {
     display: inline-block;
-    margin-left: 1em;
+    margin-left: 1.5em;
     &:first-of-type {
       position: relative;
       margin: 0;
       flex-basis: 100%;
     }
+    white-space: nowrap;
   }
 
   a {
     text-decoration: none;
     color: ${props => props.theme.colors.tertiary};
-    font-weight: 600;
+    font-size: 1.1em;
+    font-weight: 550;
     transition: all 0.2s;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
     &:hover {
-      color: white;
+      text-shadow: 0 0 0 black;
     }
   }
 `

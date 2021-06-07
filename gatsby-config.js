@@ -19,7 +19,7 @@ module.exports = {
   siteMetadata: {
     title: 'Medicare for All PDX',
     description:
-      'We are a coalition of Medicare for All supporters based in Portland, OR. Join us in building a grassroots movement for health justice! ',
+      'We are a coalition of Medicare for All supporters based in Portland, OR. Join us in building a grassroots movement for health justice!',
     siteUrl: 'https://heuristic-brahmagupta-772fcb.netlify.app/',
     image: '/images/share.jpg',
     menuLinks: [
@@ -33,16 +33,22 @@ module.exports = {
       },
       {
         name: 'Events',
-        slug: '/upcoming-events/',
+        slug: '/events/',
       },
       {
-        name: 'Contact',
-        slug: '/contact/',
+        name: 'Blog',
+        slug: '/blog/',
+      },
+      {
+        name: 'Get Involved',
+        slug: '/get-involved/',
       },
     ],
     postsPerFirstPage: 7,
     postsPerPage: 6,
     basePath: '/',
+    blogBasePath: '/blog',
+    eventsBasePath: '/events',
   },
   plugins: [
     `gatsby-plugin-emotion`,
@@ -56,7 +62,6 @@ module.exports = {
             resolve: "gatsby-remark-embed-video",
             options: {
               width: "100%",
-              height: "100%",
               ratio: 1.77,
               related: false,
               noIframeBorder: true,

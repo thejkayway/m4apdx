@@ -9,6 +9,16 @@ module.exports.data = {
       }
     }
   }`,
+  events: `{
+    allContentfulEvent(sort: { fields: [eventStartDate], order: DESC }) {
+      edges {
+        node {
+          slug
+          eventStartDate
+        }
+      }
+    }
+  }`,
   pages: `{
     allContentfulPage {
       edges {

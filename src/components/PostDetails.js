@@ -17,12 +17,18 @@ const ReadingTime = styled.p`
   display: inline-block;
 `
 
+const Url = styled.h3`
+  margin: 1rem 1rem 0 1rem;
+  color: gray;
+`
+
 const PostDetails = props => {
   return (
     <Wrapper>
       <Date>📅 {props.date}</Date>
       <span>•</span>
       <ReadingTime>{`⏱️${props.timeToRead} min read `}</ReadingTime>
+      {props.url && <Url>{props.url}</Url>}
     </Wrapper>
   )
 }
