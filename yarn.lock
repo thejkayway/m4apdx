@@ -11547,6 +11547,13 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
+react-social-icons@^5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-5.4.1.tgz#8aaa43618ed5c08702d8d6b70ed9f1f75276f255"
+  integrity sha512-pnPU8UmFQaK2MRITzU7Y80a068z40H5LFQSoBU8wWWu6cxJDnm8XuuEEpdrTiPCPEVTYnGvwSLbuHO5jB151dA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react@^16.12.0:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"

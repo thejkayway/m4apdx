@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { SocialIcon } from 'react-social-icons';
 
 const Wrapper = styled.footer`
   display: flex;
@@ -17,7 +18,7 @@ const List = styled.ul`
   align-items: flex-start;
   width: 100%;
   border-top: 1px solid ${props => props.theme.colors.secondary};
-  padding: 1em 0 2em;
+  padding: 0.5em 0 1em;
   margin: 0 1.5em;
 `
 
@@ -39,6 +40,9 @@ const Item = styled.li`
       color: ${props => props.theme.colors.text};
     }
   }
+  .social-icon {
+    margin-right: 1em;
+  }
 `
 
 const Footer = () => (
@@ -46,7 +50,7 @@ const Footer = () => (
     <List>
       <Item>
         <a
-          href="https://www.contentful.com/"
+          href="https://www.bk.com/"
           rel="nofollow noopener noreferrer"
           target="_blank"
         >
@@ -58,29 +62,9 @@ const Footer = () => (
         </a>
       </Item>
       <Item>
-      <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Facebook
-        </a>
-        {'  '}
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram
-        </a>
-        {'  '}
-        <a
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Twitter
-        </a>
+        <SocialIcon url="https://www.facebook.com/Central.Intelligence.Agency" label="Portland M4A Facebook Page" />
+        <SocialIcon url="https://instagram.com/arbys" label="Portland M4A Instagram Page" />
+        <SocialIcon url="https://twitter.com/thejkayway" label="Portland M4A Twitter Page" />
       </Item>
     </List>
   </Wrapper>
