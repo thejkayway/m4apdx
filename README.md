@@ -67,7 +67,7 @@ Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/thejkayway/m4
     description: // Description of the website
       'A starter template to build amazing static websites with Gatsby, Contentful and Netlify',
     siteUrl: 'https://url.netlify.com', // Website URL. Do not include trailing slash
-    image: '/images/share.jpg', // Path to default image for SEO
+    image: '/images/share.png', // Path to default image for SEO
     menuLinks: [ // The links used in the top menu
       {
         name: 'Home',
@@ -109,7 +109,7 @@ Edit [`/src/gatsby-plugin-theme-ui/index.js`](https://github.com/thejkayway/m4ap
 
 ### Content and SEO
 
-1.  You can replace the `share.jpg` and `favicon.png` files in the `static/images` directory.
+1.  You can replace the `share.png` and `favicon.png` files in the `static/images` directory.
 2.  Meta descriptions are defined in Contentful. If you choose to leave this field blank on new posts a 320 character excerpt of the post/page will be used instead.
 
 ## Deployment

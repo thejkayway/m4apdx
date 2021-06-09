@@ -21,7 +21,7 @@ module.exports = {
     description:
       'We are a coalition of Medicare for All supporters based in Portland, OR. Join us in building a grassroots movement for health justice!',
     siteUrl: 'https://heuristic-brahmagupta-772fcb.netlify.app/',
-    image: '/images/share.jpg',
+    image: '/images/share.png',
     menuLinks: [
       {
         name: 'Home',
