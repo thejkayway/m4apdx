@@ -1,6 +1,8 @@
 # Medicare for All Portland
 
-Demonstrating a potential website and authoring workflow with Gatsby, Contentful and Netlify.
+Demonstrating a potential website authoring workflow with Gatsby, Contentful and Netlify.
+
+We want content -- event information, blog posts, informational pages (home, about, etc) -- to be routinely edited and published by non-developer users. To this end, this site is designed with the [Gatsby](https://github.com/gatsbyjs/gatsby) static site generator. At build time, Gatsby sources content from [Contentful](https://www.contentful.com/). A build to [Netlify](https://www.netlify.com/) is triggered when a new commit is made on this repository's main branch, or when new content is published on the associated Contentful space.
 
 ## Demo
 
@@ -10,7 +12,18 @@ https://heuristic-brahmagupta-772fcb.netlify.app/
 
 ## Getting Started
 
-### Install
+### Prerequisitves
+1. `git`
+    - [Installation instructions](https://github.com/git-guides/install-git)
+2. `node` and `npm`. I  prefer installing via `nvm` rather than through your OS' package manager or a downloaded bundle. Much easier to manage target versions and updates.
+    - [Installing nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+    - Install node and npm: `nvm install node`
+
+3. `yarn`
+    - `npm install --global yarn`
+
+
+### Install Dependencies
 
 ```
 git clone https://github.com/thejkayway/m4apdx.git && cd m4apdx
@@ -22,6 +35,25 @@ yarn install
 1.  Copy [`./.contentful.json.sample`](https://github.com/thejkayway/m4apdx/blob/master/.contentful.json.sample) to `./.contentful.json`
 
 2.  Replace `spaceId` and `accessToken` for development and production environments. Info for your Contentful space can be found here: **app.contentful.com** → **Space Settings** → **API keys**.
+
+### Run Site Locally
+`yarn develop`
+
+## How is this site structured?
+
+Ignoring all the fancy build-time features that gatsby brings in, this is just a static react site. Components are stored in `src/components/`. Styling is done with template strings inside our components via [@emotion/styled](https://emotion.sh/docs/styled). Theme variables are provided to our styles by [gatsby-plugin-theme-ui](https://theme-ui.com/packages/gatsby-plugin/). Theme variables are defined in `src/gatsby-plugin-theme-ui/index.js`, the object exported there is available in our components via `${props => props.theme}`. 
+
+### That Fancy Build Time Stuff
+
+When building the site (`yarn develop` or `yarn build`), gatsby runs any function exported from `gatsby-node.js` that implements one of its [APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#apis). For our purposes `src/gatsby/node/createPages.js` does all the heavy lifting.
+
+That function creates all of the actual pages that make up our site through repeatedly calling gatsby's "createPage" helper function with a URL path for the page, a page template component, and miscellaneous context variables to help the template component fill itself out.
+
+Template components are defined in `src/templates`. They export two things:
+- a React component that uses our UI components from `src/components` to create a complete page
+-  a graphql query which populates the `data` variable in the component's input
+
+### 
 
 ## Customization
 
@@ -50,8 +82,8 @@ Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/thejkayway/m4
         slug: '/contact/',
       },
     ],
-    postsPerFirstPage: 7, // Number of posts on the first page
-    postsPerPage: 6, // Number of posts used on all other pages
+    postsPerFirstPage: 7, // Number of posts on the first page of blogs and events
+    postsPerPage: 6, // Number of posts used on all other pages of blogs and events
     /*
       Root URL for posts and tags
       For example: 'blog' will result in:
@@ -59,7 +91,7 @@ Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/thejkayway/m4
         - www.example.com/blog/post-name/
         - www.example.com/blog/tag/tag-name/
     */
-    basePath: '/', // Defaults to the homepage
+    blogBasePath: '/', // Defaults to the homepage
   }
 ```
 
@@ -69,31 +101,6 @@ Edit siteMeta data in [`/src/gatsby-config.js`](https://github.com/thejkayway/m4
 
 Edit [`/src/gatsby-plugin-theme-ui/index.js`](https://github.com/thejkayway/m4apdx/blob/master/src/gatsby-plugin-them-ui/index.js)
 
-```js
-export default {
-  colors: {
-    background: '#ffffff',
-    text: '#121212',
-    primary: '#121212',
-    secondary: '#e9e9e9',
-    tertiary: '#f3f3f3',
-    highlight: '#5b8bf7',
-  },
-  fonts: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  },
-  sizes: {
-    maxWidth: '1050px',
-    maxWidthCentered: '650px',
-  },
-  responsive: {
-    small: '35em',
-    medium: '50em',
-    large: '70em',
-  },
-}
-```
 
 ### Using Gatsby Standard Linter Config
 
