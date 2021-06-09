@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { slide as Burger } from 'react-burger-menu'
 import styled from '@emotion/styled'
 import { useSiteMetadata } from '../hooks/use-site-metadata'
+
+const activeClassName = 'currentlyActive'
 
 const Header = styled.header`
   background: ${props => props.theme.colors.primary};
@@ -9,6 +12,9 @@ const Header = styled.header`
   padding: 1.5em 0;
 `
 const Nav = styled.nav`
+  @media (max-width: ${props => props.theme.responsive.small}) {
+    display: none;
+  }
   width: 100%;
   max-width: ${props => props.theme.sizes.maxWidth};
   margin: 0 auto;
@@ -26,43 +32,132 @@ const Nav = styled.nav`
       position: relative;
       margin: 0;
       flex-basis: 100%;
+      a {
+        color: ${props => props.theme.colors.highlight};
+      }
     }
     white-space: nowrap;
   }
 
   a {
     text-decoration: none;
-    color: ${props => props.theme.colors.tertiary};
+    color: ${props => props.theme.colors.highlight};
     font-size: 1.1em;
     font-weight: 550;
+    padding: 0.5em 0.8em;
+
     transition: all 0.2s;
-    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
     &:hover {
-      text-shadow: 0 0 0 black;
+      border-radius: 0.4em;
+      background: ${props => props.theme.colors.contrast};
     }
+  }
+
+  .${activeClassName} {
+    border-radius: 0.4em;
+    background: ${props => props.theme.colors.contrast};
   }
 `
 
-const activeLinkStyle = {
-  color: 'white',
-}
+const BurgerBar = styled.div`
+  @media (min-width: ${props => props.theme.responsive.small}) {
+    display: none;
+  }
+
+  margin: -1.5em 0;
+
+  .bm-burger-button {
+    position: absolute;
+
+    display: block;
+    width: 2em;
+    height: 1.6em;
+    left: 1.5em;
+    top: 0.7em;
+  }
+
+  .bm-burger-bars {
+    background: ${props => props.theme.colors.secondary};
+  }
+
+  .bm-burger-bars-hover {
+    background: ${props => props.theme.colors.highlight};
+  }
+
+  .bm-cross-button {
+    height: 1.2em;
+    width: 1.2em;
+  }
+
+  .bm-cross {
+    background: ${props => props.theme.colors.highlight};
+  }
+
+  .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+
+  .bm-menu {
+    background: ${props => props.theme.colors.contrast};
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+
+  .bm-item-list {
+    padding: 0.8em;
+
+    .${activeClassName} {
+      border-radius: 0.4em;
+      background: ${props => props.theme.colors.primary};
+    }
+  }
+
+  .bm-item {
+    display: inline-block;
+    color: ${props => props.theme.colors.highlight};
+    padding: 0.5em;
+    margin-bottom: 0.2em;
+    text-decoration: none;
+
+    transition: all 0.2s;
+
+    &:hover {
+      border-radius: 0.4em;
+      background: ${props => props.theme.colors.primary};
+    }
+  }
+
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+`
 
 const Menu = () => {
   const { menuLinks } = useSiteMetadata()
   return (
+    <>
     <Header>
-      <Nav>
-        <ul>
-          {menuLinks.map(link => (
-            <li key={link.name}>
-              <Link to={link.slug} activeStyle={activeLinkStyle}>
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Nav>
+        <BurgerBar><Burger width='65%'>
+            {menuLinks.map(link => (
+                <Link key={link.name} to={link.slug} activeClassName={activeClassName}>
+                  {link.name}
+                </Link>
+            ))}
+          </Burger></BurgerBar>
+        <Nav>
+          <ul>
+            {menuLinks.map(link => (
+              <li key={link.name}>
+                <Link to={link.slug} activeClassName={activeClassName}>
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Nav>
     </Header>
+    </>
   )
 }
 

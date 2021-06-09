@@ -2,10 +2,11 @@ export default {
   colors: {
     background: '#ffffff',
     text: '#121212',
-    primary: '#ab0000',
-    secondary: '#e9e9e9',
-    tertiary: '#f3f3f3',
-    highlight: '#f8d8df',
+    primary: '#cd0000',
+    contrast: '#ab0000',
+    secondary: '#ededed',
+    tertiary: '#f3d3d3',
+    highlight: '#f8f8f8',
   },
   fonts: {
     body:
