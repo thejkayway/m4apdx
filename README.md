@@ -6,7 +6,7 @@ We want content -- event information, blog posts, informational pages (home, abo
 
 ## Demo
 
-https://heuristic-brahmagupta-772fcb.netlify.app/
+https://medicare-for-all-pdx.netlify.app/
 
 ![](screenshots/demo.png)
 
