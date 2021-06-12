@@ -62,9 +62,9 @@ const Footer = () => (
         </a>
       </Item>
       <Item>
-        <SocialIcon url="https://www.facebook.com/Central.Intelligence.Agency" label="Portland M4A Facebook Page" />
-        <SocialIcon url="https://instagram.com/arbys" label="Portland M4A Instagram Page" />
-        <SocialIcon url="https://twitter.com/thejkayway" label="Portland M4A Twitter Page" />
+        <SocialIcon url="https://www.facebook.com/dsam4apdx/" label="Portland M4A Facebook Page" />
+        <SocialIcon url="https://instagram.com/portlanddsa" label="Portland M4A Instagram Page" />
+        <SocialIcon url="https://twitter.com/M4M4ALL" label="M4A Twitter Page" />
       </Item>
     </List>
   </Wrapper>
