@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
+import moment from 'moment'
 
 const Post = styled.li`
   position: relative;
@@ -65,9 +66,11 @@ const Excerpt = styled.p`
 `
 
 const Card = ({ slug, heroImage, title, ...props }) => {
-  const cardDate = props.publishDate || props.eventStartDate
-  const cardEndDate = props.eventEndDate
+  const cardDate = moment(props.publishDate || props.eventStartDate).format("MMMM DD, YYYY h:mmA")
+  const cardEndDate = props.eventEndDate ? moment(props.eventEndDate).format("h:mmA") : null
+
   const mainText = props.body || props.description
+
   return (
     <>
       {heroImage && mainText && (
