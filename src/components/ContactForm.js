@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 /*
-  ⚠️ This is an example of a contact form powered with Netlify form handling.
+  ⚠️ This is an example of a contact form powered with Netlify serverless functions.
+  The backend should be written as a lambda function in $PROJECT_ROOT/netlify/functions
   Be sure to review the Netlify documentation for more information:
-  https://www.netlify.com/docs/form-handling/
+  https://www.netlify.com/docs/functions/
 */
 
 const Form = styled.form`
@@ -178,10 +179,10 @@ class ContactForm extends React.Component {
   }
 
   handleSubmit = event => {
-    fetch('/?no-cache=1', {
+    fetch('/.netlify/functions/submitContactForm?no-cache=1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
+      body: JSON.stringify(this.state),
     })
       .then(this.handleSuccess)
       .catch(error => alert(error))
@@ -271,7 +272,6 @@ class ContactForm extends React.Component {
             placeholder="Do you have any special skills or interests? Any questions you'd like answered?"
             value={this.state.message}
             onChange={this.handleInputChange}
-            required
           />
         </BigField>
         <Submit name="submit" type="submit" value="Send" />

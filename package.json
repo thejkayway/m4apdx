@@ -29,6 +29,7 @@
     "gatsby-remark-prismjs": "^3.3.31",
     "gatsby-source-contentful": "^2.1.85",
     "gatsby-transformer-remark": "^2.6.50",
+    "google-spreadsheet": "^3.1.15",
     "inquirer": "^7.0.4",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
