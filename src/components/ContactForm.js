@@ -54,20 +54,32 @@ const Form = styled.form`
   }
 `
 
-const Name = styled.input`
+const Field = styled.div`
   margin: 0 0 1em 0;
   width: 100%;
   @media (min-width: ${props => props.theme.responsive.small}) {
     width: 49%;
   }
+  input {
+    width: 100%;
+  }
+  ${props => props.required && `
+  label::after {
+    content:" *";
+    color: red;
+  }
+  `}
 `
 
-const Email = styled.input`
-  margin: 0 0 1em 0;
+const BigField = styled.div`
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
-    width: 49%;
-  }
+  margin: 0 0 1em 0;
+`
+
+
+const Label = styled.label`
+  display: block;
+  padding: 0.2em 0em 0.4em 0em;
 `
 
 const Message = styled.textarea`
@@ -149,6 +161,8 @@ class ContactForm extends React.Component {
     this.state = {
       name: '',
       email: '',
+      phoneNumber: '',
+      zipCode: '',
       message: '',
       showModal: false,
     }
@@ -178,6 +192,8 @@ class ContactForm extends React.Component {
     this.setState({
       name: '',
       email: '',
+      phoneNumber: '',
+      zipCode: '',
       message: '',
       showModal: true,
     })
@@ -204,36 +220,65 @@ class ContactForm extends React.Component {
             <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
-
-        <Name
-          name="name"
-          type="text"
-          placeholder="Full Name"
-          value={this.state.name}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Email
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Message
-          name="message"
-          type="text"
-          placeholder="Message"
-          value={this.state.message}
-          onChange={this.handleInputChange}
-          required
-        />
+        <Field required >
+          <Label>Name</Label>
+          <input
+            name="name"
+            type="text"
+            placeholder="Required"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+            required
+          />
+        </Field>
+        <Field required >
+          <Label>Email Address</Label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Required"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+            required
+          />
+        </Field>
+        <Field>
+          <Label>Phone Number</Label>
+          <input
+            name="phoneNumber"
+            type="tel"
+            placeholder="111-111-1111"
+            // match 1234567890, 123-456-7890, (123)456-7890, (123)-456-7890, (123) 456-7890
+            pattern="(?:\([0-9]{3}\)|[0-9]{3})[- ]?[0-9]{3}[- ]?[0-9]{4}"
+            value={this.state.phoneNumber}
+            onChange={this.handleInputChange}
+          />
+        </Field>
+        <Field>
+          <Label>Zip Code</Label>
+          <input
+            name="zipCode"
+            type="text"
+            value={this.state.zipCode}
+            onChange={this.handleInputChange}
+          />
+        </Field>
+        <BigField>
+          <Label>Message</Label>
+          <Message
+            name="message"
+            type="text"
+            placeholder="Do you have any special skills or interests? Any questions you'd like answered?"
+            value={this.state.message}
+            onChange={this.handleInputChange}
+            required
+          />
+        </BigField>
         <Submit name="submit" type="submit" value="Send" />
 
         <Modal visible={this.state.showModal}>
           <p>
-            Thank you for reaching out. I will get back to you as soon as
+            Thank you for reaching out. We will get back to you as soon as
             possible.
           </p>
           <Button onClick={this.closeModal}>Okay</Button>
