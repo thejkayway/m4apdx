@@ -150,12 +150,6 @@ const Button = styled.div`
   }
 `
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
-
 class ContactForm extends React.Component {
   constructor(props) {
     super(props)
