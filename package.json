@@ -48,7 +48,8 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "develop": "env-cmd -f ./.netlify.json netlify dev",
+    "develop": "yarn run env-cmd -f ./.netlify.json netlify dev",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "test": "yarn run lint:css && yarn run lint:js && yarn run check-pretty",
