@@ -6,13 +6,13 @@ We want content -- event information, blog posts, informational pages (home, abo
 
 ## Demo
 
-https://heuristic-brahmagupta-772fcb.netlify.app/
+https://medicare-for-all-pdx.netlify.app/
 
 ![](screenshots/demo.png)
 
 ## Getting Started
 
-### Prerequisitves
+### Prerequisites
 1. `git`
     - [Installation instructions](https://github.com/git-guides/install-git)
 2. `node` and `npm`. I  prefer installing via `nvm` rather than through your OS' package manager or a downloaded bundle. Much easier to manage target versions and updates.
