@@ -71,8 +71,8 @@ export const query = graphql`
               src
             }
           }
-          eventStartDate(formatString: "MMMM DD, YYYY h:mmA")
-          eventEndDate(formatString: "h:mmA")
+          eventStartDate
+          eventEndDate
           eventUrl
           description {
             childMarkdownRemark {
