@@ -36,11 +36,29 @@ const Nav = styled.nav`
         color: ${props => props.theme.colors.highlight};
       }
     }
+    &:last-of-type {
+      a {
+        border: 2px solid ${props => props.theme.colors.text};
+        border-radius: 0.4em;
+        background: ${props => props.theme.colors.background};
+        color: ${props => props.theme.colors.text};
+        &:hover {
+          color: ${props => props.theme.colors.background};
+          background: ${props => props.theme.colors.text};
+        }
+      }
+      .${activeClassName} {
+        color: ${props => props.theme.colors.background};
+        background: ${props => props.theme.colors.text};
+      }
+    }
     white-space: nowrap;
   }
 
   a {
     text-decoration: none;
+    border-radius: 0.4em;
+    border: 1px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.highlight};
     font-size: 1.1em;
     font-weight: 550;
@@ -49,12 +67,14 @@ const Nav = styled.nav`
     transition: all 0.2s;
     &:hover {
       border-radius: 0.4em;
+      border: 1px solid ${props => props.theme.colors.text};
       background: ${props => props.theme.colors.contrast};
     }
   }
 
   .${activeClassName} {
     border-radius: 0.4em;
+    border: 1px solid ${props => props.theme.colors.text};
     background: ${props => props.theme.colors.contrast};
   }
 `
@@ -99,7 +119,7 @@ const BurgerBar = styled.div`
   }
 
   .bm-menu {
-    background: ${props => props.theme.colors.contrast};
+    background: ${props => props.theme.colors.primary};
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }
@@ -109,22 +129,41 @@ const BurgerBar = styled.div`
 
     .${activeClassName} {
       border-radius: 0.4em;
-      background: ${props => props.theme.colors.primary};
+      border: 1px solid ${props => props.theme.colors.text};
+      background: ${props => props.theme.colors.contrast};
     }
   }
 
   .bm-item {
     display: inline-block;
     color: ${props => props.theme.colors.highlight};
-    padding: 0.5em;
-    margin-bottom: 0.2em;
+    border: 1px solid ${props => props.theme.colors.primary};
+    padding: 0.7em;
+    margin-bottom: 0.25em;
     text-decoration: none;
+    text-align: center;
 
     transition: all 0.2s;
 
     &:hover {
       border-radius: 0.4em;
-      background: ${props => props.theme.colors.primary};
+      background: ${props => props.theme.colors.contrast};
+      border: 1px solid ${props => props.theme.colors.text};
+    }
+
+    &:last-of-type {
+      border: 2px solid ${props => props.theme.colors.text};
+      border-radius: 0.4em;
+      background: ${props => props.theme.colors.background};
+      color: ${props => props.theme.colors.text};
+      &.${activeClassName} {
+        color: ${props => props.theme.colors.background};
+        background: ${props => props.theme.colors.text};
+      }
+      &:hover {
+        color: ${props => props.theme.colors.background};
+        background: ${props => props.theme.colors.text};
+      }
     }
   }
 

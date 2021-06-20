@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 /*
-  ⚠️ This is an example of a contact form powered with Netlify form handling.
+  ⚠️ This is an example of a contact form powered with Netlify serverless functions.
+  The backend should be written as a lambda function in $PROJECT_ROOT/netlify/functions
   Be sure to review the Netlify documentation for more information:
-  https://www.netlify.com/docs/form-handling/
+  https://www.netlify.com/docs/functions/
 */
 
 const Form = styled.form`
@@ -54,20 +55,32 @@ const Form = styled.form`
   }
 `
 
-const Name = styled.input`
+const Field = styled.div`
   margin: 0 0 1em 0;
   width: 100%;
   @media (min-width: ${props => props.theme.responsive.small}) {
     width: 49%;
   }
+  input {
+    width: 100%;
+  }
+  ${props => props.required && `
+  label::after {
+    content:" *";
+    color: red;
+  }
+  `}
 `
 
-const Email = styled.input`
-  margin: 0 0 1em 0;
+const BigField = styled.div`
   width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
-    width: 49%;
-  }
+  margin: 0 0 1em 0;
+`
+
+
+const Label = styled.label`
+  display: block;
+  padding: 0.2em 0em 0.4em 0em;
 `
 
 const Message = styled.textarea`
@@ -137,18 +150,14 @@ const Button = styled.div`
   }
 `
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
-
 class ContactForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       name: '',
       email: '',
+      phoneNumber: '',
+      zipCode: '',
       message: '',
       showModal: false,
     }
@@ -164,10 +173,10 @@ class ContactForm extends React.Component {
   }
 
   handleSubmit = event => {
-    fetch('/?no-cache=1', {
+    fetch('/.netlify/functions/submitContactForm?no-cache=1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
+      body: JSON.stringify(this.state),
     })
       .then(this.handleSuccess)
       .catch(error => alert(error))
@@ -178,6 +187,8 @@ class ContactForm extends React.Component {
     this.setState({
       name: '',
       email: '',
+      phoneNumber: '',
+      zipCode: '',
       message: '',
       showModal: true,
     })
@@ -204,36 +215,64 @@ class ContactForm extends React.Component {
             <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
-
-        <Name
-          name="name"
-          type="text"
-          placeholder="Full Name"
-          value={this.state.name}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Email
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-          required
-        />
-        <Message
-          name="message"
-          type="text"
-          placeholder="Message"
-          value={this.state.message}
-          onChange={this.handleInputChange}
-          required
-        />
+        <Field required >
+          <Label>Name</Label>
+          <input
+            name="name"
+            type="text"
+            placeholder="Required"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+            required
+          />
+        </Field>
+        <Field required >
+          <Label>Email Address</Label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Required"
+            value={this.state.email}
+            onChange={this.handleInputChange}
+            required
+          />
+        </Field>
+        <Field>
+          <Label>Phone Number</Label>
+          <input
+            name="phoneNumber"
+            type="tel"
+            placeholder="111-111-1111"
+            // match 1234567890, 123-456-7890, (123)456-7890, (123)-456-7890, (123) 456-7890
+            pattern="(?:\([0-9]{3}\)|[0-9]{3})[- ]?[0-9]{3}[- ]?[0-9]{4}"
+            value={this.state.phoneNumber}
+            onChange={this.handleInputChange}
+          />
+        </Field>
+        <Field>
+          <Label>Zip Code</Label>
+          <input
+            name="zipCode"
+            type="text"
+            value={this.state.zipCode}
+            onChange={this.handleInputChange}
+          />
+        </Field>
+        <BigField>
+          <Label>Message</Label>
+          <Message
+            name="message"
+            type="text"
+            placeholder="Do you have any special skills or interests? Any questions you'd like answered?"
+            value={this.state.message}
+            onChange={this.handleInputChange}
+          />
+        </BigField>
         <Submit name="submit" type="submit" value="Send" />
 
         <Modal visible={this.state.showModal}>
           <p>
-            Thank you for reaching out. I will get back to you as soon as
+            Thank you for reaching out. We will get back to you as soon as
             possible.
           </p>
           <Button onClick={this.closeModal}>Okay</Button>

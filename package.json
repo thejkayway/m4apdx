@@ -29,6 +29,7 @@
     "gatsby-remark-prismjs": "^3.3.31",
     "gatsby-source-contentful": "^2.1.85",
     "gatsby-transformer-remark": "^2.6.50",
+    "google-spreadsheet": "^3.1.15",
     "inquirer": "^7.0.4",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
@@ -47,7 +48,8 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "yarn run env-cmd -f ./.netlify.json netlify dev",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "test": "yarn run lint:css && yarn run lint:js && yarn run check-pretty",
@@ -59,6 +61,7 @@
     "clean": "gatsby clean"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-gatsby-standard": "^2.2.0",
     "prettier": "^1.19.1",

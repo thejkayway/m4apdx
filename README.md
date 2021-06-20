@@ -4,6 +4,8 @@ Demonstrating a potential website authoring workflow with Gatsby, Contentful and
 
 We want content -- event information, blog posts, informational pages (home, about, etc) -- to be routinely edited and published by non-developer users. To this end, this site is designed with the [Gatsby](https://github.com/gatsbyjs/gatsby) static site generator. At build time, Gatsby sources content from [Contentful](https://www.contentful.com/). A build to [Netlify](https://www.netlify.com/) is triggered when a new commit is made on this repository's main branch, or when new content is published on the associated Contentful space.
 
+We also want responses from the contact form to be accessible to the least-technical of users (aka no databases, no airtable, etc). To that end, this site uses a Netlify Functions backend to receive form submissions and append them as a new row in a Google Sheets spreadsheet.
+
 ## Demo
 
 https://medicare-for-all-pdx.netlify.app/
@@ -22,6 +24,9 @@ https://medicare-for-all-pdx.netlify.app/
 3. `yarn`
     - `npm install --global yarn`
 
+4. `netlify`
+    - `npm install --global netlify-cli`
+
 
 ### Install Dependencies
 
@@ -36,12 +41,26 @@ yarn install
 
 2.  Replace `spaceId` and `accessToken` for development and production environments. Info for your Contentful space can be found here: **app.contentful.com** → **Space Settings** → **API keys**.
 
+### Setup Form Response Storage
+
+1. [Create a new Google sheet](https://docs.google.com/spreadsheets/u/0/create) to store form responses while testing. Note the sheet ID in the URL (`https://docs.google.com/spreadsheets/d/${SHEET_ID}`).
+
+2. Follow the instructions [here](https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication?id=service-account) to create a service account with permission to edit your sheet. Note the `client_email` and `private_key` in the file generated from that process.
+
+3. Copy [`./.netlify.json.sample`](https://github.com/thejkayway/m4apdx/blob/master/.netlify.json.sample) to `./.netlify.json`
+
+4. Fill in values for `GOOGLE_SHEET_ID`, `GOOGLE_SERVICE_ACCOUNT_EMAIL`, and `GOOGLE_PRIVATE_KEY`. 
+    - Sheet ID can be found in the URL of the sheet from step 1 above.
+    - Service account email and and private key come from `client_email` and `private_key` in step 2 above.
+
 ### Run Site Locally
 `yarn develop`
 
 ## How is this site structured?
 
-Ignoring all the fancy build-time features that gatsby brings in, this is just a static react site. Components are stored in `src/components/`. Styling is done with template strings inside our components via [@emotion/styled](https://emotion.sh/docs/styled). Theme variables are provided to our styles by [gatsby-plugin-theme-ui](https://theme-ui.com/packages/gatsby-plugin/). Theme variables are defined in `src/gatsby-plugin-theme-ui/index.js`, the object exported there is available in our components via `${props => props.theme}`. 
+Ignoring all the fancy build-time features that gatsby brings in, this is just a static react site. Components are stored in `src/components/`. Styling is done with template strings inside our components via [@emotion/styled](https://emotion.sh/docs/styled). Theme variables are provided to our styles by [gatsby-plugin-theme-ui](https://theme-ui.com/packages/gatsby-plugin/). Theme variables are defined in `src/gatsby-plugin-theme-ui/index.js`, the object exported there is available in our components via `${props => props.theme}`.
+
+Backend code is run via Netlify Functions (aka Netlify managed AWS Lambda). This means that you can create a javascript file in `netlify/functions` that exports a function called `handler` and Netlify will handle 
 
 ### That Fancy Build Time Stuff
 
@@ -51,7 +70,7 @@ That function creates all of the actual pages that make up our site through repe
 
 Template components are defined in `src/templates`. They export two things:
 - a React component that uses our UI components from `src/components` to create a complete page
--  a graphql query which populates the `data` variable in the component's input
+- a graphql query which populates the `data` variable in the template component's input
 
 ### 
 
@@ -114,29 +133,26 @@ Edit [`/src/gatsby-plugin-theme-ui/index.js`](https://github.com/thejkayway/m4ap
 
 ## Deployment
 
-### Manual Netlify Deployment
-
-1.  Run `gatsby build`
-
-2.  Drag and drop the folder `/public/` into Netlify
-
-### Netlify Deployment From Git (Recommended)
+### Netlify Deployment From Git
 
 1.  [New Netlify website from Git](https://app.netlify.com/start)
 
 2.  Connect with GitHub and select your repo
 
-3.  Navigate to Netlify: **Settings** → **Build & Deploy** → **Build Environment Variables**. Add the following environment variables using the Space ID and Content Delivery API - access token from Contentful. Additionally if desired you can enter a Google Analytics ID. The variables must be named exactly like this in order to work properly.
+3.  Navigate to Netlify: **Settings** → **Build & Deploy** → **Build Environment Variables**. Add the following environment variables (the variables must be named exactly like this in order to work properly):
 
 ```
-ACCESS_TOKEN
-SPACE_ID
-GOOGLE_ANALYTICS
+ACCESS_TOKEN                   Contentful Content Delivery API Access Token
+SPACE_ID                       Contentful Space ID
+GOOGLE_SHEET_ID                See "Setup Form Response Storage" above
+GOOGLE_SERVICE_ACCOUNT_EMAIL   See "Setup Form Response Storage" above
+GOOGLE_PRIVATE_KEY             See "Setup Form Response Storage" above
+GOOGLE_ANALYTICS               (optional)
 ```
 
 ![](screenshots/netlify-build-environment-variables.jpg)
 
-4.  Navigate to Netlify: **Deploys**. Click `Trigger deploy` to manually trigger a deploy to confirm the website is building successfully using your build environment variables. At this point be aware that every time you push to `master` a deploy will automatically start and be published to production.
+4.  Navigate to Netlify: **Deploys**. Click `Trigger deploy` to manually trigger a deploy to confirm the website is building successfully using your build environment variables. At this point be aware that every time you push to `main` a deploy will automatically start and be published to production.
 
 ## Additional Settings
 
