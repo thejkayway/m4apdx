@@ -8,6 +8,7 @@ import TagList from '../components/TagList'
 import PostLinks from '../components/PostLinks'
 import PostDetails from '../components/PostDetails'
 import SEO from '../components/SEO'
+import moment from 'moment'
 
 const EventTemplate = ({ data, pageContext }) => {
   const {
@@ -23,6 +24,7 @@ const EventTemplate = ({ data, pageContext }) => {
   const previous = pageContext.prev
   const next = pageContext.next
   const { basePath } = pageContext
+  const eventDateLocalTime = moment(eventStartDate).format("MMMM DD, YYYY h:mmA")
 
   let ogImage
   try {
@@ -46,7 +48,7 @@ const EventTemplate = ({ data, pageContext }) => {
       <Container>
         {tags && <TagList tags={tags} basePath={basePath} />}
         <PostDetails
-          date={eventStartDate}
+          date={eventDateLocalTime}
           url={eventUrl}
         />
         <PageBody body={description} />
@@ -66,8 +68,7 @@ export const query = graphql`
           content
         }
       }
-      eventStartDate(formatString: "MMMM DD, YYYY h:mmA")
-      eventStartDateISO: eventStartDate(formatString: "YYYY-MM-DD")
+      eventStartDate
       eventEndDate(formatString: "h:mmA")
       eventUrl
       heroImage {
