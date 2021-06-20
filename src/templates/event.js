@@ -48,7 +48,6 @@ const EventTemplate = ({ data, pageContext }) => {
         <PostDetails
           date={eventStartDate}
           url={eventUrl}
-          timeToRead={description.childMarkdownRemark.timeToRead}
         />
         <PageBody body={description} />
       </Container>
