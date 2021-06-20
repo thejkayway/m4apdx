@@ -31,10 +31,11 @@ const epochMillisToGoogleSheetsDateFormat = (ts) => {
 
 exports.handler = async function (event, context) {
   // authenticate to google sheets and load our form response "database" sheet
+  // have to un-escape newline characters in private key since netlify automatically escapes them
   const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
   await doc.useServiceAccountAuth({
     client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY,
+    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, "\n"),
   })
 
   await doc.loadInfo()
@@ -46,6 +47,8 @@ exports.handler = async function (event, context) {
   } catch (e) {
     if (e.message.includes('No values in the header row')) {
       sheet.setHeaderRow(headerValues)
+    } else {
+      throw e
     }
   }
   
