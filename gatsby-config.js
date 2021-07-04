@@ -36,10 +36,6 @@ module.exports = {
         slug: '/events/',
       },
       {
-        name: 'Blog',
-        slug: '/blog/',
-      },
-      {
         name: 'Get Involved',
         slug: '/get-involved/',
       },
