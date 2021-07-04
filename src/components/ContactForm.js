@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+import Multiselect from 'multiselect-react-dropdown'
 
 /*
   ⚠️ This is an example of a contact form powered with Netlify serverless functions.
@@ -40,6 +41,9 @@ const Form = styled.form`
       box-shadow: none;
     }
   }
+  select {
+    width: 100%;
+  }
   &::before {
     content: '';
     background: black;
@@ -63,6 +67,17 @@ const Field = styled.div`
   }
   input {
     width: 100%;
+  }
+  div {
+    /* multiselect-react-dropdown overwrites any styles we use for .searchWrapper, so plain div it is */
+    padding: 0;
+    border: none;
+  }
+  .chip {
+    background: ${props => props.theme.colors.primary};
+  }
+  .option:hover {
+    background: ${props => props.theme.colors.primary};
   }
   ${props => props.required && `
   label::after {
@@ -93,11 +108,14 @@ const Message = styled.textarea`
 
 const Submit = styled.input`
   background: ${props => props.theme.colors.text} !important;
+  border: 2px solid ${props => props.theme.colors.text};
   color: white !important;
   cursor: pointer;
   transition: 0.2s;
   &:hover {
     background: ${props => props.theme.colors.highlight} !important;
+    border: 2px solid ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.text} !important;
   }
 `
 
@@ -150,15 +168,40 @@ const Button = styled.div`
   }
 `
 
+const volunteerAreaOptions = [
+  {
+    name: 'Fundraising',
+    id: 'fundraising'
+  },
+  {
+    name: 'Graphic Design',
+    id: 'graphicDesign'
+  },
+  {
+    name: 'Logistics',
+    id: 'logistics'
+  },
+  {
+    name: 'Outreach / PR',
+    id: 'outreach/pr'
+  },
+  {
+    name: 'Social Media',
+    id: 'socialMedia'
+  },
+];
+
 class ContactForm extends React.Component {
   constructor(props) {
     super(props)
+    this.multiselectRef = React.createRef([]);
     this.state = {
       name: '',
       email: '',
       phoneNumber: '',
       zipCode: '',
       message: '',
+      volunteerAreas: [],
       showModal: false,
     }
   }
@@ -169,6 +212,20 @@ class ContactForm extends React.Component {
     const name = target.name
     this.setState({
       [name]: value,
+    })
+  }
+
+  onSelect = (selectedList, selectedItem) => {
+    const selectedIds = selectedList.map(volunteerOption => volunteerOption.id)
+    this.setState({
+      volunteerAreas: selectedIds
+    })
+  }
+
+  onRemove = (selectedList, selectedItem) => {
+    const selectedIds = selectedList.map(volunteerOption => volunteerOption.id)
+    this.setState({
+      volunteerAreas: selectedIds
     })
   }
 
@@ -184,12 +241,14 @@ class ContactForm extends React.Component {
   }
 
   handleSuccess = () => {
+    this.multiselectRef.current.resetSelectedValues()
     this.setState({
       name: '',
       email: '',
       phoneNumber: '',
       zipCode: '',
       message: '',
+      volunteerAreas: [],
       showModal: true,
     })
   }
@@ -256,6 +315,18 @@ class ContactForm extends React.Component {
             type="text"
             value={this.state.zipCode}
             onChange={this.handleInputChange}
+          />
+        </Field>
+        <Field>
+          <Label>Volunteer Areas</Label>
+          <Multiselect
+            options={volunteerAreaOptions}
+            displayValue="name"
+            onSelect={this.onSelect}
+            onRemove={this.onRemove}
+            closeOnSelect={false}
+            avoidHighlightFirstOption
+            ref={this.multiselectRef}
           />
         </Field>
         <BigField>

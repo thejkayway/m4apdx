@@ -6,6 +6,7 @@ const headerValues = [
   'email',
   'phoneNumber',
   'zipCode',
+  'volunteerAreas',
   'message',
 ]
 
@@ -53,7 +54,7 @@ exports.handler = async function (event, context) {
   }
   
   // get form responses from request
-  const { name, email, phoneNumber, zipCode, message } = JSON.parse(event.body);
+  const { name, email, phoneNumber, zipCode, message, volunteerAreas } = JSON.parse(event.body);
 
   // add row to our sheet
   await sheet.addRow({
@@ -62,6 +63,7 @@ exports.handler = async function (event, context) {
     email: email,
     phoneNumber: phoneNumber,
     zipCode: zipCode,
+    volunteerAreas: volunteerAreas.join(),
     message: message,
   })
 
