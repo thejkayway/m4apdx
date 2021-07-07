@@ -4,7 +4,6 @@ import { Global } from '@emotion/core'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { globalStyles } from '../styles/globalStyles.js'
-import PageTitle from '../components/PageTitle'
 
 const Root = styled.div`
   font-family: ${props => props.theme.fonts.body};
@@ -44,8 +43,7 @@ const Layout = props => {
           Skip to content
         </Skip>
         <Menu />
-        <div id="main">
-          <PageTitle></PageTitle>{props.children}</div>
+        <div id="main">{props.children}</div>
       </div>
       <Footer />
       <Global styles={globalStyles} />
