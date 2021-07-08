@@ -33,7 +33,7 @@ const Body = styled.div`
     transition: 0.2s;
     color: ${props => props.theme.colors.text};
     &:hover {
-      color: ${props => props.theme.colors.highlight};
+      color: ${props => props.theme.colors.contrast};
     }
   }
 

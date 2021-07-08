@@ -64,7 +64,9 @@ const Field = styled.div`
   input {
     width: 100%;
   }
-  ${props => props.required && `
+  ${props =>
+    props.required &&
+    `
   label::after {
     content:" *";
     color: red;
@@ -76,7 +78,6 @@ const BigField = styled.div`
   width: 100%;
   margin: 0 0 1em 0;
 `
-
 
 const Label = styled.label`
   display: block;
@@ -93,11 +94,14 @@ const Message = styled.textarea`
 
 const Submit = styled.input`
   background: ${props => props.theme.colors.text} !important;
+  border: 2px solid ${props => props.theme.colors.text};
   color: white !important;
   cursor: pointer;
   transition: 0.2s;
   &:hover {
+    color: ${props => props.theme.colors.text} !important;
     background: ${props => props.theme.colors.highlight} !important;
+    border: 2px solid ${props => props.theme.colors.text};
   }
 `
 
@@ -215,7 +219,7 @@ class ContactForm extends React.Component {
             <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
-        <Field required >
+        <Field required>
           <Label>Name</Label>
           <input
             name="name"
@@ -226,7 +230,7 @@ class ContactForm extends React.Component {
             required
           />
         </Field>
-        <Field required >
+        <Field required>
           <Label>Email Address</Label>
           <input
             name="email"

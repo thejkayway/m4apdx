@@ -19,7 +19,7 @@ const Post = styled.li`
     flex: ${props => (props.featured ? '0 0 100%' : '0 0 32%')};
   }
   &:hover {
-    background: ${props => props.theme.colors.secondary};
+    box-shadow: 0.1em 0.1em 1em ${props => props.theme.colors.secondary};
   }
   a {
     display: flex;
@@ -66,8 +66,12 @@ const Excerpt = styled.p`
 `
 
 const Card = ({ slug, heroImage, title, ...props }) => {
-  const cardDate = moment(props.publishDate || props.eventStartDate).format("MMMM DD, YYYY h:mmA")
-  const cardEndDate = props.eventEndDate ? moment(props.eventEndDate).format("h:mmA") : null
+  const cardDate = moment(props.publishDate || props.eventStartDate).format(
+    'MMMM DD, YYYY h:mmA'
+  )
+  const cardEndDate = props.eventEndDate
+    ? moment(props.eventEndDate).format('h:mmA')
+    : null
 
   const mainText = props.body || props.description
 
@@ -78,10 +82,15 @@ const Card = ({ slug, heroImage, title, ...props }) => {
           <Link to={`${props.basePath}/${slug}/`}>
             <StyledImg fluid={heroImage.fluid} backgroundColor={'#eeeeee'} />
             <Title>{title}</Title>
-            <Date>{cardDate}{cardEndDate && ` - ${cardEndDate}`}</Date>
-            {mainText.childMarkdownRemark.timeToRead && <ReadingTime>
-              {mainText.childMarkdownRemark.timeToRead} min read
-            </ReadingTime>}
+            <Date>
+              {cardDate}
+              {cardEndDate && ` - ${cardEndDate}`}
+            </Date>
+            {mainText.childMarkdownRemark.timeToRead && (
+              <ReadingTime>
+                {mainText.childMarkdownRemark.timeToRead} min read
+              </ReadingTime>
+            )}
             <Excerpt
               dangerouslySetInnerHTML={{
                 __html: mainText.childMarkdownRemark.excerpt,
