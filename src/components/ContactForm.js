@@ -134,6 +134,7 @@ const Modal = styled.div`
 
 const Button = styled.div`
   background: ${props => props.theme.colors.text};
+  border: 2px solid ${props => props.theme.colors.text};
   font-size: 1em;
   display: inline-block;
   margin: 0 auto;
@@ -151,6 +152,8 @@ const Button = styled.div`
   }
   &:hover {
     background: ${props => props.theme.colors.highlight};
+    border: 2px solid ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.text};
   }
 `
 
