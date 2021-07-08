@@ -15,6 +15,7 @@ const Box = styled.div`
   max-width: ${props => props.theme.sizes.maxWidthCentered};
   a {
     background: ${props => props.theme.colors.primary};
+    border: 2px solid ${props => props.theme.colors.primary};
     color: white;
     padding: 1em;
     border-radius: 2px;
@@ -22,6 +23,8 @@ const Box = styled.div`
     transition: 0.2s;
     &:hover {
       background: ${props => props.theme.colors.highlight};
+      border: 2px solid ${props => props.theme.colors.text};
+      color: ${props => props.theme.colors.text};
     }
   }
 `
