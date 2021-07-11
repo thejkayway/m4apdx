@@ -29,9 +29,9 @@ const Events = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <PageTitle>Events</PageTitle>
       <SEO title={startCase(basePath)} image={ogImage} />
       <Container>
+        <PageTitle>Events</PageTitle>
         {isFirstPage ? (
           <CardList>
             <Card {...featuredEvent} featured basePath={basePath} />
