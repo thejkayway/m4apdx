@@ -17,7 +17,9 @@ module.exports = async ({ graphql, actions }) => {
     const prev = i === 0 ? null : events[i - 1].node
 
     createPage({
-      path: `${eventsBasePath === '/' ? '' : eventsBasePath}/${event.node.slug}/`,
+      path: `${eventsBasePath === '/' ? '' : eventsBasePath}/${
+        event.node.slug
+      }/`,
       component: path.resolve(`./src/templates/event.js`),
       context: {
         slug: event.node.slug,
@@ -81,7 +83,7 @@ module.exports = async ({ graphql, actions }) => {
 
   tags.forEach((tag, i) => {
     const tagPagination =
-    blogBasePath === '/'
+      blogBasePath === '/'
         ? `/tag/${tag.node.slug}`
         : `/${blogBasePath}/tag/${tag.node.slug}`
 
@@ -114,7 +116,9 @@ module.exports = async ({ graphql, actions }) => {
 
   // Create home page
   const homePageQuery = await graphql(query.data.pages)
-  const home = homePageQuery.data.allContentfulPage.edges.find(page => page.node.slug === 'home')
+  const home = homePageQuery.data.allContentfulPage.edges.find(
+    page => page.node.slug === 'home'
+  )
   createPage({
     path: `/`,
     component: path.resolve(`./src/templates/page.js`),

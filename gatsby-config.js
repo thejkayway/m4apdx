@@ -38,6 +38,17 @@ module.exports = {
       {
         name: 'Get Involved',
         slug: '/get-involved/',
+        highVisibility: true,
+      },
+    ],
+    searchIndices: [
+      {
+        name: 'Pages',
+        title: 'Pages',
+      },
+      {
+        name: 'Events',
+        title: 'Events',
       },
     ],
     postsPerFirstPage: 7,
@@ -55,21 +66,21 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: "gatsby-remark-embed-video",
+            resolve: 'gatsby-remark-embed-video',
             options: {
-              width: "100%",
+              width: '100%',
               ratio: 1.77,
               related: false,
               noIframeBorder: true,
               loadingStrategy: 'lazy',
               urlOverrides: [
                 {
-                  id: "youtube",
+                  id: 'youtube',
                   embedURL: videoId =>
                     `https://www.youtube-nocookie.com/embed/${videoId}`,
                 },
               ],
-              containerClass: "embedVideo-container",
+              containerClass: 'embedVideo-container',
               iframeId: false,
             },
           },
@@ -125,5 +136,13 @@ module.exports = {
       },
     },
     'gatsby-plugin-netlify',
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: require('./src/utils/algolia-queries'),
+      },
+    },
   ],
 }

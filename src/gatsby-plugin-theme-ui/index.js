@@ -17,7 +17,7 @@ export default {
     maxWidthCentered: '650px',
   },
   responsive: {
-    small: '35em',
+    small: '45em',
     medium: '50em',
     large: '70em',
   },
