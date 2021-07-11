@@ -7,6 +7,7 @@ import Container from '../components/Container'
 import Pagination from '../components/Pagination'
 import SEO from '../components/SEO'
 import { startCase } from 'lodash'
+import PageTitle from '../components/PageTitle'
 
 const Events = ({ data, pageContext }) => {
   const events = data.allContentfulEvent.edges
@@ -28,6 +29,7 @@ const Events = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <PageTitle>Events</PageTitle>
       <SEO title={startCase(basePath)} image={ogImage} />
       <Container>
         {isFirstPage ? (
