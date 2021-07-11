@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
-import { Global } from '@emotion/core'
+import { Global, ThemeProvider } from '@emotion/react'
 import Menu from '../components/Menu'
 import Footer from '../components/Footer'
 import { globalStyles } from '../styles/globalStyles.js'
+import theme from '../gatsby-plugin-theme-ui/index'
 
 const Root = styled.div`
   font-family: ${props => props.theme.fonts.body};
@@ -37,17 +38,19 @@ const Layout = props => {
   useEffect(() => window.addEventListener('keydown', handleFirstTab), [])
 
   return (
-    <Root className="siteRoot">
-      <div className="siteContent">
-        <Skip href="#main" id="skip-navigation">
-          Skip to content
-        </Skip>
-        <Menu />
-        <main id="main">{props.children}</main>
-      </div>
-      <Footer />
-      <Global styles={globalStyles} />
-    </Root>
+    <ThemeProvider theme={theme}>
+      <Root className="siteRoot">
+        <div className="siteContent">
+          <Skip href="#main" id="skip-navigation">
+            Skip to content
+          </Skip>
+          <Menu />
+          <main id="main">{props.children}</main>
+        </div>
+        <Footer />
+        <Global styles={globalStyles} />
+      </Root>
+    </ThemeProvider>
   )
 }
 

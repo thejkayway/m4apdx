@@ -13,6 +13,11 @@ export const useSiteMetadata = () => {
             menuLinks {
               name
               slug
+              highVisibility
+            }
+            searchIndices {
+              name
+              title
             }
           }
         }
