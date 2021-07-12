@@ -20,8 +20,8 @@ const Results = styled.div`
 `
 
 const Result = styled.div`
-  background: ${props => props.theme.colors.background};
-  border: none;
+  background: ${props => props.theme.colors.background} !important;
+  border: none !important;
   padding: 0.3em;
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
@@ -40,8 +40,8 @@ const Result = styled.div`
 
     &:hover {
       color: ${props => props.theme.colors.contrast} !important;
-      background: ${props => props.theme.colors.background};
-      border: none;
+      background: ${props => props.theme.colors.background} !important;
+      border: none !important;
     }
   }
 `
