@@ -9,7 +9,27 @@ import styled from '@emotion/styled'
   https://www.netlify.com/docs/functions/
 */
 
-const Form = styled.form`
+const Form = styled.form``
+
+const Field = styled.div`
+  margin: 0 0 1em 0;
+  width: 100%;
+  @media (min-width: ${props => props.theme.responsive.small}) {
+    width: 49%;
+  }
+  input {
+    width: 100%;
+  }
+  ${props =>
+    props.required &&
+    `
+  label::after {
+    content:" *";
+    color: red;
+  }
+  `}
+`
+const FieldSet = styled.fieldset`
   max-width: ${props => props.theme.sizes.maxWidthCentered};
   margin: 0 auto;
   display: flex;
@@ -55,24 +75,8 @@ const Form = styled.form`
   }
 `
 
-const Field = styled.div`
-  margin: 0 0 1em 0;
-  width: 100%;
-  @media (min-width: ${props => props.theme.responsive.small}) {
-    width: 49%;
-  }
-  input {
-    width: 100%;
-  }
-  ${props =>
-    props.required &&
-    `
-  label::after {
-    content:" *";
-    color: red;
-  }
-  `}
-`
+const Legend = styled.legend`
+  margin: 0 0 1em 0;`
 
 const BigField = styled.div`
   width: 100%;
@@ -215,6 +219,7 @@ class ContactForm extends React.Component {
         overlay={this.state.showModal}
         onClick={this.closeModal}
       >
+        <FieldSet>
         <input type="hidden" name="form-name" value="contact" />
         <p hidden>
           <label>
@@ -222,6 +227,8 @@ class ContactForm extends React.Component {
             <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
+        
+          <Legend>Get involved with the Medicare for All Rally!</Legend>
         <Field required>
           <Label>Name</Label>
           <input
@@ -275,8 +282,9 @@ class ContactForm extends React.Component {
             onChange={this.handleInputChange}
           />
         </BigField>
+        
         <Submit name="submit" type="submit" value="Send" />
-
+        </FieldSet>
         <Modal visible={this.state.showModal}>
           <p>
             Thank you for reaching out. We will get back to you as soon as
@@ -284,6 +292,7 @@ class ContactForm extends React.Component {
           </p>
           <Button onClick={this.closeModal}>Okay</Button>
         </Modal>
+        
       </Form>
     )
   }
