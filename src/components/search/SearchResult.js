@@ -35,7 +35,7 @@ const Result = styled.div`
 
   a {
     color: ${props => props.theme.colors.text} !important;
-    border: none;
+    border: none !important;
     text-decoration: none;
 
     &:hover {
@@ -52,9 +52,8 @@ const ResultTitle = styled.div`
 `
 
 const ResultExcerpt = styled.div`
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 300;
-  font-style: italic;
 `
 
 const IndexHeader = styled.div`
