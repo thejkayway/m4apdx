@@ -49,17 +49,11 @@ const Footer = () => (
   <Wrapper>
     <List>
       <Item>
-        <a
-          href="https://www.bk.com/"
-          rel="nofollow noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            src="https://images.ctfassets.net/7sv3zhq42l8v/7hAULZQuiXnAO3F9O7Se1O/0e4fcab3b057139a5615843617e783dc/M4A_Poster_New_2.png"
-            style={{ width: '100px' }}
-            alt="Medicare for All PDX Logo"
-          />
-        </a>
+        <img
+          src="https://images.ctfassets.net/7sv3zhq42l8v/7hAULZQuiXnAO3F9O7Se1O/0e4fcab3b057139a5615843617e783dc/M4A_Poster_New_2.png"
+          style={{ width: '100px' }}
+          alt="Medicare for All PDX Logo"
+        />
       </Item>
       <Item>
         <SocialIcon url="https://www.facebook.com/dsam4apdx/" label="Portland M4A Facebook Page" />
