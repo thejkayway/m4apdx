@@ -68,7 +68,7 @@ const Nav = styled.nav`
   }
 
   .${highVisibilityClassName} {
-    border: 2px solid ${props => props.theme.colors.text};
+    border: 2px solid ${props => props.theme.colors.text} !important;
     border-radius: 0.4em;
     background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
