@@ -82,10 +82,7 @@ module.exports = async ({ graphql, actions }) => {
   const tags = tagsQuery.data.allContentfulTag.edges
 
   tags.forEach((tag, i) => {
-    const tagPagination =
-      blogBasePath === '/'
-        ? `/tag/${tag.node.slug}`
-        : `/${blogBasePath}/tag/${tag.node.slug}`
+    const tagPagination = `/tag/${tag.node.slug}`
 
     paginate({
       createPage,
@@ -95,7 +92,8 @@ module.exports = async ({ graphql, actions }) => {
       pathPrefix: tagPagination,
       context: {
         slug: tag.node.slug,
-        basePath: blogBasePath === '/' ? '' : blogBasePath,
+        blogBasePath: blogBasePath === '/' ? '' : blogBasePath,
+        eventsBasePath: eventsBasePath === '/' ? '' : eventsBasePath,
         paginationPath: tagPagination,
       },
     })
