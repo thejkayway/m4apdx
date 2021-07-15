@@ -24,7 +24,9 @@ const EventTemplate = ({ data, pageContext }) => {
   const previous = pageContext.prev
   const next = pageContext.next
   const { basePath } = pageContext
-  const eventDateLocalTime = moment(eventStartDate).format("MMMM DD, YYYY h:mmA")
+  const eventDateLocalTime = moment(eventStartDate).format(
+    'MMMM DD, YYYY h:mmA'
+  )
 
   let ogImage
   try {
@@ -46,11 +48,8 @@ const EventTemplate = ({ data, pageContext }) => {
       />
       <Hero title={title} image={heroImage} height={'50vh'} />
       <Container>
-        {tags && <TagList tags={tags} basePath={basePath} />}
-        <PostDetails
-          date={eventDateLocalTime}
-          url={eventUrl}
-        />
+        {tags && <TagList tags={tags} />}
+        <PostDetails date={eventDateLocalTime} url={eventUrl} />
         <PageBody body={description} />
       </Container>
       <PostLinks previous={previous} next={next} basePath={basePath} />
