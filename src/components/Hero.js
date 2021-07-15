@@ -4,6 +4,8 @@ import styled from '@emotion/styled'
 
 const Wrapper = styled.section`
   position: relative;
+  display: flex;
+  align-items: center;
   min-height: 300px;
   height: auto;
   @media (min-width: ${props => props.theme.responsive.small}) {
@@ -16,7 +18,7 @@ const BgImg = styled(Img)`
   height: 100%;
   &::before {
     content: '';
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.35);
     position: absolute;
     top: 0;
     left: 0;
@@ -42,6 +44,7 @@ const Title = styled.h1`
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  text-shadow: 0 0 0.15em black;
 `
 
 const Hero = props => (
