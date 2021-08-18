@@ -1,8 +1,10 @@
 # Medicare for All Portland
 
-Demonstrating a potential website authoring workflow with Gatsby, Contentful and Netlify.
+Our requirements: inexpensive, performant, custom, accessible, and easy to update. This is an attempt to satisfy those requirements and eventually move towards a web template for social movement organizations to use to quickly spin up a website that their comms teams can maintain with minimal IT infrastructure and support.
 
-We want content -- event information, blog posts, informational pages (home, about, etc) -- to be routinely edited and published by non-developer users. To this end, this site is designed with the [Gatsby](https://github.com/gatsbyjs/gatsby) static site generator. At build time, Gatsby sources content from [Contentful](https://www.contentful.com/). A build to [Netlify](https://www.netlify.com/) is triggered when a new commit is made on this repository's main branch, or when new content is published on the associated Contentful space.
+We want content -- event information, blog posts, informational pages (home, about, etc) -- to be routinely edited and published by non-developer users. How do we achieve this?
+
+This site is designed with the [Gatsby](https://github.com/gatsbyjs/gatsby) static site generator. At build time, Gatsby sources content from [Contentful](https://www.contentful.com/) CMS. A build to [Netlify](https://www.netlify.com/) is triggered when a new commit is made on this repository's main branch, or when new content is published on the associated Contentful space.
 
 We also want responses from the contact form to be accessible to the least-technical of users (aka no databases, no airtable, etc). To that end, this site uses a Netlify Functions backend to receive form submissions and append them as a new row in a Google Sheets spreadsheet.
 
