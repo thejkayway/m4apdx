@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6df0736a-0d39-4702-9f23-d8f3bf64ce3d/deploy-status)](https://app.netlify.com/sites/medicare-for-all-pdx/deploys)
+
 # Medicare for All Portland
 
 Our requirements: inexpensive, performant, custom, accessible, and easy to update. This is an attempt to satisfy those requirements and eventually move towards a web template for social movement organizations to use to quickly spin up a website that their comms teams can maintain with minimal IT infrastructure and support.
