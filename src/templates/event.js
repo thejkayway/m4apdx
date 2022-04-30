@@ -72,6 +72,7 @@ export const query = graphql`
       eventUrl
       heroImage {
         title
+        description
         fluid(maxWidth: 1800) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
